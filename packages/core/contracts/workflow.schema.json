@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Crayon-hua/smart-workflow-ui/contracts/workflow.schema.json",
+  "title": "Smart Workflow instance (version 1.0)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "nodes", "edges"],
+  "properties": {
+    "version": { "const": "1.0" },
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "nodes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/node" }
+    },
+    "edges": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/edge" }
+    },
+    "viewport": { "$ref": "#/$defs/viewport" }
+  },
+  "$defs": {
+    "viewport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "zoom"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "zoom": { "type": "number" }
+      }
+    },
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "position", "data"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "minLength": 1 },
+        "position": { "$ref": "#/$defs/position" },
+        "data": { "type": "object" }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "source", "target"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 },
+        "target": { "type": "string", "minLength": 1 },
+        "sourceHandle": { "type": ["string", "null"] },
+        "targetHandle": { "type": ["string", "null"] },
+        "label": { "type": "string" },
+        "data": { "type": "object" }
+      }
+    }
+  }
+}

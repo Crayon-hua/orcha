@@ -9,6 +9,7 @@ const root = dirname(fileURLToPath(import.meta.url))
 
 const externals = [
   'vue',
+  '@ihxy/workflow-core',
   '@vue-flow/core',
   '@vue-flow/background',
   '@vue-flow/controls',
@@ -22,7 +23,7 @@ export default defineConfig({
     dts({
       tsconfigPath: resolve(root, 'tsconfig.json'),
       include: ['src/**/*.ts', 'src/**/*.vue'],
-      exclude: ['src/env.d.ts'],
+      exclude: ['src/env.d.ts', 'src/**/__tests__/**', 'src/**/*.test.ts'],
     }),
   ],
   build: {

@@ -1,0 +1,4 @@
+{
+  "expect": "parse-error",
+  "note": "边的 target 不存在，parseWorkflow 应失败"
+}

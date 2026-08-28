@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "name": "dangling-edge",
+  "nodes": [
+    { "id": "start_1", "type": "start", "position": { "x": 0, "y": 0 }, "data": { "label": "开始" } }
+  ],
+  "edges": [
+    { "id": "e1", "source": "start_1", "target": "missing_1", "sourceHandle": "source", "targetHandle": "target" }
+  ]
+}

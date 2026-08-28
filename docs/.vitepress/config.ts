@@ -34,6 +34,7 @@ export default defineConfig({
     resolve: {
       alias: {
         '@ihxy/smart-workflow-designer': resolve(root, '../../packages/designer/src/index.ts'),
+        '@ihxy/workflow-core': resolve(root, '../../packages/core/src/index.ts'),
       },
       dedupe: ['vue', '@vue-flow/core'],
     },
@@ -44,7 +45,7 @@ export default defineConfig({
       },
     },
     ssr: {
-      noExternal: ['@ihxy/smart-workflow-designer', '@vue-flow/core', '@vue-flow/background', '@vue-flow/controls', '@vue-flow/minimap'],
+        noExternal: ['@ihxy/smart-workflow-designer', '@ihxy/workflow-core', '@vue-flow/core', '@vue-flow/background', '@vue-flow/controls', '@vue-flow/minimap'],
     },
   },
 })

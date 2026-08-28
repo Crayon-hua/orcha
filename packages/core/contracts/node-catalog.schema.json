@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Crayon-hua/smart-workflow-ui/contracts/node-catalog.schema.json",
+  "title": "Smart Workflow node catalog (catalogVersion 1.0)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["catalogVersion", "types"],
+  "properties": {
+    "catalogVersion": { "const": "1.0" },
+    "types": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nodeType" }
+    }
+  },
+  "$defs": {
+    "ioType": {
+      "type": "string",
+      "enum": ["string", "number", "boolean", "object", "array", "any"]
+    },
+    "ioField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "$ref": "#/$defs/ioType" },
+        "required": { "type": "boolean" },
+        "description": { "type": "string" }
+      }
+    },
+    "portPosition": {
+      "type": "string",
+      "enum": ["top", "right", "bottom", "left"]
+    },
+    "portSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "position": { "$ref": "#/$defs/portPosition" }
+      }
+    },
+    "portOrBool": {
+      "oneOf": [
+        { "type": "boolean" },
+        { "$ref": "#/$defs/portSpec" }
+      ]
+    },
+    "ports": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source": { "$ref": "#/$defs/portOrBool" },
+        "target": { "$ref": "#/$defs/portOrBool" },
+        "sources": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/portSpec" }
+        },
+        "targets": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/portSpec" }
+        }
+      }
+    },
+    "nodeType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "inputs", "outputs", "ports"],
+      "properties": {
+        "type": { "type": "string", "minLength": 1 },
+        "inputs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ioField" }
+        },
+        "outputs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ioField" }
+        },
+        "ports": { "$ref": "#/$defs/ports" }
+      }
+    }
+  }
+}

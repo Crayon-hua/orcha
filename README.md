@@ -2,13 +2,15 @@
 
 基于 [Vue Flow](https://vueflow.dev/) 的 Vue 3 工作流设计器：画布、节点面板、属性面板、JSON 导入导出。
 
-本仓库是 pnpm workspace：可发布的库在 `packages/designer`，playground 与 VitePress 文档站各自独立成包。
+本仓库是 pnpm workspace：可发布的库在 `packages/core`（`@ihxy/workflow-core`）与 `packages/designer`（`@ihxy/smart-workflow-designer`），playground 与 VitePress 文档站各自独立成包。
 
 ## 安装
 
 ```bash
 pnpm add @ihxy/smart-workflow-designer vue @vue-flow/core @vue-flow/background @vue-flow/controls @vue-flow/minimap
 ```
+
+只解析 / 校验工作流 JSON、不需要画布时，可单独安装 `@ihxy/workflow-core`。
 
 `vue` 与 `@vue-flow/*` 是 peerDependencies，必须由宿主安装，避免 Vue Flow 双实例。
 
@@ -59,7 +61,8 @@ const extraTypes = [
 pnpm install
 pnpm dev          # playground 设计器 Demo
 pnpm docs:dev     # VitePress 文档站
-pnpm build        # 构建 @ihxy/smart-workflow-designer
+pnpm build        # 构建 @ihxy/workflow-core 与 @ihxy/smart-workflow-designer
+pnpm test         # core 契约单测 + designer 物料校验
 pnpm lint:all
 ```
 
@@ -69,7 +72,7 @@ playground 默认 `http://localhost:5200/`，文档站 `pnpm docs:dev` 默认 `h
 
 - **CI**：PR 和推 `main` 时跑 lint / type-check / build
 - **文档站**：推 `main` 时由 GitHub Pages workflow 部署
-- **npm**：只在推 `v*` tag 时发布 `@ihxy/smart-workflow-designer`
+- **npm**：只在推 `v*` tag 时发布 `@ihxy/workflow-core` 与 `@ihxy/smart-workflow-designer`（先 core 后 designer）
 
 在 `main` 上把 `packages/designer/package.json` 的 `version` 改成目标版本并提交，然后：
 

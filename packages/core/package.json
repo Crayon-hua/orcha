@@ -1,0 +1,60 @@
+{
+  "name": "@ihxy/workflow-core",
+  "type": "module",
+  "version": "0.2.0",
+  "description": "工作流 JSON、节点 IO catalog 与图校验。无 Vue 依赖。",
+  "license": "Apache-2.0",
+  "homepage": "https://crayon-hua.github.io/smart-workflow-ui/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Crayon-hua/smart-workflow-ui.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/Crayon-hua/smart-workflow-ui/issues"
+  },
+  "keywords": [
+    "workflow",
+    "json",
+    "catalog",
+    "schema"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./contracts/*": "./contracts/*"
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "files": [
+    "LICENSE",
+    "contracts",
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "./contracts/*": "./contracts/*"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run --config vitest.config.ts",
+    "type-check": "tsc --noEmit -p tsconfig.json",
+    "prepublishOnly": "pnpm type-check && pnpm build",
+    "publish:only": "pnpm publish --access public --no-git-checks --no-provenance --registry=https://registry.npmjs.org"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "ajv": "^8.20.0",
+    "typescript": "~5.9.3",
+    "vitest": "^3.2.7"
+  }
+}

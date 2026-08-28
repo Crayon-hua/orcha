@@ -8,9 +8,10 @@ const root = dirname(fileURLToPath(import.meta.url))
 export default defineConfig({
   plugins: [vue()],
   resolve: {
-    alias: {
-      '@ihxy/smart-workflow-designer': resolve(root, '../packages/designer/src/index.ts'),
-    },
+      alias: {
+        '@ihxy/smart-workflow-designer': resolve(root, '../packages/designer/src/index.ts'),
+        '@ihxy/workflow-core': resolve(root, '../packages/core/src/index.ts'),
+      },
     dedupe: ['vue', '@vue-flow/core'],
   },
   server: {

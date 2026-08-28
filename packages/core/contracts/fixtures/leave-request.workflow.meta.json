@@ -1,0 +1,4 @@
+{
+  "expect": "ok",
+  "note": "合法实例：图完整，表达式引用上游 task_1.result"
+}

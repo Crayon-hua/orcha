@@ -1,0 +1,45 @@
+{
+  "catalogVersion": "1.0",
+  "types": [
+    {
+      "type": "start",
+      "inputs": [],
+      "outputs": [
+        { "name": "trigger", "type": "any", "description": "流程启动" }
+      ],
+      "ports": { "source": true }
+    },
+    {
+      "type": "end",
+      "inputs": [
+        { "name": "result", "type": "any", "description": "流程结果" }
+      ],
+      "outputs": [],
+      "ports": { "target": true }
+    },
+    {
+      "type": "task",
+      "inputs": [
+        { "name": "input", "type": "any" }
+      ],
+      "outputs": [
+        { "name": "result", "type": "object", "description": "任务输出" }
+      ],
+      "ports": { "target": true, "source": true }
+    },
+    {
+      "type": "condition",
+      "inputs": [
+        { "name": "input", "type": "any" }
+      ],
+      "outputs": [],
+      "ports": {
+        "target": true,
+        "sources": [
+          { "id": "true", "label": "是", "position": "right" },
+          { "id": "false", "label": "否", "position": "right" }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "expect": "ok",
+  "note": "内置四节点 IO / ports 金样例，应与 materials/builtin.ts 派生 catalog 一致"
+}

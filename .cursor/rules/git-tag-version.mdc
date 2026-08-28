@@ -1,0 +1,55 @@
+---
+description: 每次提交代码后必须按 SemVer 升级并打 git tag（大/中/小版本）
+alwaysApply: true
+---
+
+# 提交必须升级 Tag 版本
+
+用户要求 **commit** 时，在 commit **成功之后**必须打一个新的 git tag，禁止只提交不打 tag。未要求 commit 时不要打 tag。
+
+## 版本格式
+
+- 形式：`vMAJOR.MINOR.PATCH`（与现有 tag 一致，例如 `v0.1.1`）
+- 必须带 `v` 前缀；三位数字，禁止 `v1.2`、`v1`、日期 tag
+- 新 tag 必须严格大于当前最新 tag，禁止复用、移动、删除已有 tag（除非用户明确要求）
+
+## 升级规则
+
+| 档位 | 更新哪一位 | 结果 | 何时用 |
+|------|------------|------|--------|
+| **大版本** | 第一位 MAJOR | `vX+1.0.0` | 破坏性变更、不兼容 API、用户明确说「大版本」 |
+| **中版本** | 第二位 MINOR | `vX.Y+1.0` | `feat` 新功能、用户明确说「中版本」 |
+| **小版本** | 第三位 PATCH | `vX.Y.Z+1` | `fix` / `docs` / `style` / `refactor` / `perf` / `test` / `build` / `ci` / `chore` / `revert`，或用户明确说「小版本」 |
+
+用户口头指定的档位优先于 commit type。一次 commit 只升一档、只打一个 tag。
+
+示例（当前最新为 `v1.2.3`）：
+
+- 小版本 → `v1.2.4`
+- 中版本 → `v1.3.0`（PATCH 归零）
+- 大版本 → `v2.0.0`（MINOR、PATCH 归零）
+
+## 执行步骤（不可跳过）
+
+1. 读取最新 tag：`git tag --sort=-v:refname`（取第一条）。无 tag 时按 `v0.0.0` 起算再 bump。
+2. 按上表算出 `NEW_TAG`（如 `v0.1.2`）。
+3. **先 commit，成功后再打 tag**。commit 失败则不要打 tag。
+4. 打附注 tag，message 与 commit 标题一致：
+
+```powershell
+git tag -a vX.Y.Z -m "type(scope): description"
+```
+
+5. `git describe --tags --abbrev=0` 确认 HEAD 已指向 `NEW_TAG`。
+6. **默认不 push tag**。用户明确要求 push / 推送时，代码与 tag 一起推：`git push` 且 `git push origin NEW_TAG`。
+
+## 同步 package 版本
+
+打 tag 前，把发布包 `packages/designer/package.json` 和（若本 commit 改了 core）`packages/core/package.json` 的 `version` 改成去掉 `v` 的数字（`v0.1.2` → `0.1.2`），并纳入**同一次** commit。根目录 `package.json` 为 private，不必跟着改。
+
+## 禁止
+
+- 在旧 commit 上补打本次应升的版本（必须打在刚创建的 commit 上）
+- 用 lightweight tag（必须 `-a`）
+- `--force` 覆盖已有 tag
+- 一次提交打多个 tag，或跳过升级直接沿用旧 tag

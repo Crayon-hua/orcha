@@ -1,0 +1,4 @@
+{
+  "expect": "validate-error",
+  "note": "引用了上游节点不存在的 output，validateWorkflowAgainstCatalog 应失败"
+}

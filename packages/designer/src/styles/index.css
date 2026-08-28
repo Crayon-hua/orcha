@@ -322,3 +322,61 @@
   background: var(--sw-primary);
   border: 2px solid #fff;
 }
+
+.sw-field__req {
+  margin-left: 2px;
+  color: var(--sw-danger);
+}
+
+.sw-field__error {
+  margin: 0;
+  color: var(--sw-danger);
+  font-size: 11px;
+}
+
+.sw-variable-input__list {
+  margin-top: 6px;
+  padding: 6px;
+  background: #f8fafc;
+  border: 1px solid var(--sw-border);
+  border-radius: 6px;
+}
+
+.sw-variable-input__hint,
+.sw-variable-input__empty {
+  margin: 0 0 4px;
+  color: var(--sw-muted);
+  font-size: 11px;
+}
+
+.sw-variable-input__node {
+  margin: 6px 0 4px;
+  color: var(--sw-muted);
+  font-size: 11px;
+}
+
+.sw-variable-input__item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 4px;
+  padding: 4px 6px;
+  color: var(--sw-text);
+  font-size: 12px;
+  text-align: left;
+  background: #fff;
+  border: 1px solid var(--sw-border);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sw-variable-input__item:hover {
+  border-color: var(--sw-primary);
+}
+
+.sw-variable-input__type {
+  color: var(--sw-muted);
+  font-size: 10px;
+}
