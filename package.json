@@ -1,0 +1,45 @@
+{
+  "name": "smart-workflow-ui",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --filter smart-workflow-designer-playground dev",
+    "build": "pnpm --filter smart-workflow-designer build",
+    "docs:dev": "pnpm --filter smart-workflow-designer-docs dev",
+    "docs:build": "pnpm --filter smart-workflow-designer-docs build",
+    "docs:preview": "pnpm --filter smart-workflow-designer-docs preview",
+    "type-check": "pnpm --filter smart-workflow-designer type-check",
+    "lint:js": "eslint .",
+    "lint:js:fix": "eslint . --fix",
+    "lint:css": "stylelint \"**/*.{css,vue,html}\"",
+    "lint:css:fix": "stylelint \"**/*.{css,vue,html}\" --fix",
+    "lint:all": "pnpm lint:js && pnpm lint:css",
+    "lint:all:fix": "pnpm lint:js:fix && pnpm lint:css:fix",
+    "publish:only": "pnpm --filter smart-workflow-designer publish --access public --no-git-checks --no-provenance --registry=https://registry.npmjs.org"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.32.0",
+    "eslint": "^9.32.0",
+    "eslint-plugin-vue": "^10.4.0",
+    "globals": "^16.3.0",
+    "postcss-html": "^1.8.0",
+    "postcss-less": "^6.0.0",
+    "stylelint": "^16.26.1",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-recommended-vue": "^1.6.1",
+    "stylelint-config-standard": "^39.0.1",
+    "stylelint-less": "^4.0.0",
+    "stylelint-order": "^6.0.4",
+    "typescript-eslint": "^8.40.0",
+    "vue-eslint-parser": "^10.2.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  }
+}

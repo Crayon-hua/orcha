@@ -1,0 +1,71 @@
+{
+  "name": "smart-workflow-designer",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Vue 3 工作流设计器，基于 Vue Flow：画布、节点面板、属性面板、JSON 导入导出。",
+  "license": "Apache-2.0",
+  "homepage": "https://crayon-hua.github.io/smart-workflow-ui/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Crayon-hua/smart-workflow-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Crayon-hua/smart-workflow-ui/issues"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "vue-flow",
+    "workflow",
+    "designer",
+    "flowchart"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "LICENSE",
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "vite build",
+    "type-check": "vue-tsc --noEmit -p tsconfig.json",
+    "prepublishOnly": "pnpm type-check && pnpm build",
+    "publish:only": "pnpm publish --access public --no-git-checks --no-provenance --registry=https://registry.npmjs.org"
+  },
+  "peerDependencies": {
+    "@vue-flow/background": "^1.3.0",
+    "@vue-flow/controls": "^1.1.0",
+    "@vue-flow/core": "^1.41.0",
+    "@vue-flow/minimap": "^1.5.0",
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.0",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue-flow/background": "^1.3.2",
+    "@vue-flow/controls": "^1.1.3",
+    "@vue-flow/core": "^1.47.0",
+    "@vue-flow/minimap": "^1.5.4",
+    "typescript": "~5.9.2",
+    "vite": "^7.1.11",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-lib-inject-css": "^2.2.2",
+    "vue": "^3.5.18",
+    "vue-tsc": "^3.0.5"
+  }
+}
