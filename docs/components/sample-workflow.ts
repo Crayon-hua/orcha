@@ -1,4 +1,4 @@
-import type { WorkflowDefinition } from 'smart-workflow-designer'
+import type { WorkflowDefinition } from '@ihxy/smart-workflow-designer'
 
 export const sampleWorkflow: WorkflowDefinition = {
   version: '1.0',

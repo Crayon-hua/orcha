@@ -1,4 +1,4 @@
-# smart-workflow-designer
+# @ihxy/smart-workflow-designer
 
 基于 [Vue Flow](https://vueflow.dev/) 的 Vue 3 工作流设计器：画布、节点面板、属性面板、JSON 导入导出。
 
@@ -7,7 +7,7 @@
 ## 安装
 
 ```bash
-pnpm add smart-workflow-designer vue @vue-flow/core @vue-flow/background @vue-flow/controls @vue-flow/minimap
+pnpm add @ihxy/smart-workflow-designer vue @vue-flow/core @vue-flow/background @vue-flow/controls @vue-flow/minimap
 ```
 
 `vue` 与 `@vue-flow/*` 是 peerDependencies，必须由宿主安装，避免 Vue Flow 双实例。
@@ -20,19 +20,19 @@ pnpm add smart-workflow-designer vue @vue-flow/core @vue-flow/background @vue-fl
 </template>
 
 <script setup lang="ts">
-import { WorkflowDesigner, createEmptyWorkflow } from 'smart-workflow-designer'
+import { WorkflowDesigner, createEmptyWorkflow } from '@ihxy/smart-workflow-designer'
 import { ref } from 'vue'
 
 const workflow = ref(createEmptyWorkflow('我的流程'))
 </script>
 ```
 
-组件会自行注入样式。也可以显式引入 `smart-workflow-designer/style.css`。
+组件会自行注入样式。也可以显式引入 `@ihxy/smart-workflow-designer/style.css`。
 
 自定义节点：
 
 ```ts
-import { defineNodeType } from 'smart-workflow-designer'
+import { defineNodeType } from '@ihxy/smart-workflow-designer'
 
 const extraTypes = [
   defineNodeType({
@@ -59,7 +59,7 @@ const extraTypes = [
 pnpm install
 pnpm dev          # playground 设计器 Demo
 pnpm docs:dev     # VitePress 文档站
-pnpm build        # 构建 smart-workflow-designer
+pnpm build        # 构建 @ihxy/smart-workflow-designer
 pnpm lint:all
 ```
 
@@ -69,7 +69,7 @@ playground 默认 `http://localhost:5200/`，文档站 `pnpm docs:dev` 默认 `h
 
 - **CI**：PR 和推 `main` 时跑 lint / type-check / build
 - **文档站**：推 `main` 时由 GitHub Pages workflow 部署
-- **npm**：只在推 `v*` tag 时发布 `smart-workflow-designer`
+- **npm**：只在推 `v*` tag 时发布 `@ihxy/smart-workflow-designer`
 
 在 `main` 上把 `packages/designer/package.json` 的 `version` 改成目标版本并提交，然后：
 

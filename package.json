@@ -10,18 +10,18 @@
   },
   "scripts": {
     "dev": "pnpm --filter smart-workflow-designer-playground dev",
-    "build": "pnpm --filter smart-workflow-designer build",
+    "build": "pnpm --filter @ihxy/smart-workflow-designer build",
     "docs:dev": "pnpm --filter smart-workflow-designer-docs dev",
     "docs:build": "pnpm --filter smart-workflow-designer-docs build",
     "docs:preview": "pnpm --filter smart-workflow-designer-docs preview",
-    "type-check": "pnpm --filter smart-workflow-designer type-check",
+    "type-check": "pnpm --filter @ihxy/smart-workflow-designer type-check",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint . --fix",
     "lint:css": "stylelint \"**/*.{css,vue,html}\"",
     "lint:css:fix": "stylelint \"**/*.{css,vue,html}\" --fix",
     "lint:all": "pnpm lint:js && pnpm lint:css",
     "lint:all:fix": "pnpm lint:js:fix && pnpm lint:css:fix",
-    "publish:only": "pnpm --filter smart-workflow-designer publish --access public --no-git-checks --no-provenance --registry=https://registry.npmjs.org"
+    "publish:only": "pnpm --filter @ihxy/smart-workflow-designer publish --access public --no-git-checks --no-provenance --registry=https://registry.npmjs.org"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",

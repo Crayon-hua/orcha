@@ -3,7 +3,7 @@
 ## 安装
 
 ```bash
-pnpm add smart-workflow-designer vue @vue-flow/core @vue-flow/background @vue-flow/controls @vue-flow/minimap
+pnpm add @ihxy/smart-workflow-designer vue @vue-flow/core @vue-flow/background @vue-flow/controls @vue-flow/minimap
 ```
 
 `vue` 与 `@vue-flow/*` 必须由宿主安装。库内部不打包它们，否则 Vue Flow 的 `provide/inject` 会失效。
@@ -25,7 +25,7 @@ pnpm add smart-workflow-designer vue @vue-flow/core @vue-flow/background @vue-fl
 </template>
 
 <script setup lang="ts">
-import { WorkflowDesigner, createEmptyWorkflow } from 'smart-workflow-designer'
+import { WorkflowDesigner, createEmptyWorkflow } from '@ihxy/smart-workflow-designer'
 import { ref } from 'vue'
 
 const workflow = ref(createEmptyWorkflow('我的流程'))
@@ -35,7 +35,7 @@ const workflow = ref(createEmptyWorkflow('我的流程'))
 组件会自行注入样式。也可以显式：
 
 ```ts
-import 'smart-workflow-designer/style.css'
+import '@ihxy/smart-workflow-designer/style.css'
 ```
 
 ## Props
@@ -50,7 +50,7 @@ import 'smart-workflow-designer/style.css'
 ## 自定义节点
 
 ```ts
-import { defineNodeType } from 'smart-workflow-designer'
+import { defineNodeType } from '@ihxy/smart-workflow-designer'
 
 const extraTypes = [
   defineNodeType({

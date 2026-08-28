@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      'smart-workflow-designer': resolve(root, '../packages/designer/src/index.ts'),
+      '@ihxy/smart-workflow-designer': resolve(root, '../packages/designer/src/index.ts'),
     },
     dedupe: ['vue', '@vue-flow/core'],
   },

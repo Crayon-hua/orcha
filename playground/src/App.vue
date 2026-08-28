@@ -4,7 +4,7 @@ import {
   defineNodeType,
   WorkflowDesigner,
   type WorkflowDefinition,
-} from 'smart-workflow-designer'
+} from '@ihxy/smart-workflow-designer'
 import ApprovalNode from './ApprovalNode.vue'
 
 const extraTypes = [
