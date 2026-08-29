@@ -1,7 +1,7 @@
 {
   "name": "@ihxy/orcha-vue",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.2",
   "description": "Orcha — Vue Flow canvas adapter and node registry. Re-exports Handle / useVueFlow.",
   "license": "Apache-2.0",
   "homepage": "https://crayon-hua.github.io/orcha/",
