@@ -1,7 +1,7 @@
 {
   "name": "@ihxy/workflow-core",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "工作流 JSON、节点 IO catalog 与图校验。无 Vue 依赖。",
   "license": "Apache-2.0",
   "homepage": "https://crayon-hua.github.io/smart-workflow-ui/",
