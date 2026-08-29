@@ -146,3 +146,5 @@ export interface NodeTypeDefinition {
   outputs?: NodeIOField[]
   defaultData?: Record<string, unknown>
 }
+
+export type NodeRegistry = Map<string, NodeTypeDefinition>

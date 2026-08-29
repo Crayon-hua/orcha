@@ -1,4 +1,4 @@
-import type { WorkflowDefinition } from '@ihxy/smart-workflow-designer'
+import type { WorkflowDefinition } from '@ihxy/orcha-editor'
 
 export const sampleWorkflow: WorkflowDefinition = {
   version: '1.0',

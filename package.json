@@ -1,5 +1,5 @@
 {
-  "name": "smart-workflow-ui",
+  "name": "orcha",
   "type": "module",
   "version": "0.1.0",
   "private": true,
@@ -10,19 +10,19 @@
   },
   "scripts": {
     "dev": "pnpm --filter smart-workflow-designer-playground dev",
-    "build": "pnpm --filter @ihxy/workflow-core build && pnpm --filter @ihxy/smart-workflow-designer build",
+    "build": "pnpm --filter \"./packages/**\" -r run build",
     "docs:dev": "pnpm --filter smart-workflow-designer-docs dev",
     "docs:build": "pnpm --filter smart-workflow-designer-docs build",
     "docs:preview": "pnpm --filter smart-workflow-designer-docs preview",
-    "type-check": "pnpm --filter @ihxy/workflow-core type-check && pnpm --filter @ihxy/smart-workflow-designer type-check",
-    "test": "pnpm --filter @ihxy/workflow-core test && pnpm --filter @ihxy/smart-workflow-designer test",
+    "type-check": "pnpm --filter \"./packages/**\" -r run type-check",
+    "test": "pnpm --filter @ihxy/orcha-core test && pnpm --filter @ihxy/orcha-materials test",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint . --fix",
     "lint:css": "stylelint \"**/*.{css,vue,html}\"",
     "lint:css:fix": "stylelint \"**/*.{css,vue,html}\" --fix",
     "lint:all": "pnpm lint:js && pnpm lint:css",
     "lint:all:fix": "pnpm lint:js:fix && pnpm lint:css:fix",
-    "publish:only": "pnpm --filter @ihxy/workflow-core publish --access public --no-git-checks --no-provenance --registry=https://registry.npmjs.org && pnpm --filter @ihxy/smart-workflow-designer publish --access public --no-git-checks --no-provenance --registry=https://registry.npmjs.org"
+    "publish:only": "pnpm --filter @ihxy/orcha-core publish:only && pnpm --filter @ihxy/orcha-variable publish:only && pnpm --filter @ihxy/orcha-plugins publish:only && pnpm --filter @ihxy/orcha-form publish:only && pnpm --filter @ihxy/orcha-vue publish:only && pnpm --filter @ihxy/orcha-materials publish:only && pnpm --filter @ihxy/orcha-editor publish:only"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Handle, Position } from '@vue-flow/core'
+import { Handle, Position } from '@ihxy/orcha-vue'
 
 defineProps<{
   data: Record<string, unknown> & { label?: string; approver?: string }

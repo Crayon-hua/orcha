@@ -56,6 +56,7 @@ export type {
   NodePaletteMeta,
   NodePortSpec,
   NodePortsConfig,
+  NodeRegistry,
   NodeTypeContract,
   NodeTypeDefinition,
   RuntimePayload,

@@ -4,7 +4,7 @@ import {
   defineNodeType,
   WorkflowDesigner,
   type WorkflowDefinition,
-} from '@ihxy/smart-workflow-designer'
+} from '@ihxy/orcha-editor'
 import ApprovalNode from './ApprovalNode.vue'
 import { sampleWorkflow } from './sample-workflow'
 

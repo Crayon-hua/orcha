@@ -45,7 +45,7 @@ git tag -a vX.Y.Z -m "type(scope): description"
 
 ## 同步 package 版本
 
-打 tag 前，把发布包 `packages/designer/package.json` 和（若本 commit 改了 core）`packages/core/package.json` 的 `version` 改成去掉 `v` 的数字（`v0.1.2` → `0.1.2`），并纳入**同一次** commit。根目录 `package.json` 为 private，不必跟着改。
+打 tag 前，把七个 `@ihxy/orcha-*` 包（`packages/core`、`vue`、`form`、`variable`、`plugins`、`materials`、`editor` 的 `package.json`）的 `version` 改成去掉 `v` 的数字（`v0.1.2` → `0.1.2`），并纳入**同一次** commit。以 `packages/editor/package.json` 为准，其余包保持同版本。根目录 `package.json` 为 private，不必跟着改。
 
 ## 禁止
 

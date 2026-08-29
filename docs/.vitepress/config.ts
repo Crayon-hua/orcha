@@ -4,11 +4,15 @@ import { defineConfig } from 'vitepress'
 
 const root = dirname(fileURLToPath(import.meta.url))
 
+function vueFlow(name: string): string {
+  return resolve(root, `../../packages/vue/node_modules/@vue-flow/${name}`)
+}
+
 export default defineConfig({
-  title: '@ihxy/smart-workflow-designer',
-  description: 'Vue 3 工作流设计器，基于 Vue Flow：画布、节点面板、属性面板、JSON 导入导出。',
+  title: 'Orcha',
+  description: 'An extensible visual orchestration framework for Vue.',
   lang: 'zh-CN',
-  base: '/smart-workflow-ui/',
+  base: '/orcha/',
   lastUpdated: true,
   themeConfig: {
     nav: [
@@ -27,16 +31,28 @@ export default defineConfig({
     ],
     outline: 'deep',
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/Crayon-hua/smart-workflow-ui' },
+      { icon: 'github', link: 'https://github.com/Crayon-hua/orcha' },
     ],
   },
   vite: {
     resolve: {
       alias: {
-        '@ihxy/smart-workflow-designer': resolve(root, '../../packages/designer/src/index.ts'),
-        '@ihxy/workflow-core': resolve(root, '../../packages/core/src/index.ts'),
+        '@ihxy/orcha-editor': resolve(root, '../../packages/editor/src/index.ts'),
+        '@ihxy/orcha-vue': resolve(root, '../../packages/vue/src/index.ts'),
+        '@ihxy/orcha-core': resolve(root, '../../packages/core/src/index.ts'),
+        '@ihxy/orcha-form': resolve(root, '../../packages/form/src/index.ts'),
+        '@ihxy/orcha-variable': resolve(root, '../../packages/variable/src/index.ts'),
+        '@ihxy/orcha-plugins': resolve(root, '../../packages/plugins/src/index.ts'),
+        '@ihxy/orcha-materials': resolve(root, '../../packages/materials/src/index.ts'),
+        '@vue-flow/core': vueFlow('core'),
+        '@vue-flow/background': vueFlow('background'),
+        '@vue-flow/controls': vueFlow('controls'),
+        '@vue-flow/minimap': vueFlow('minimap'),
       },
       dedupe: ['vue', '@vue-flow/core'],
+    },
+    optimizeDeps: {
+      include: ['@vue-flow/core', '@vue-flow/background', '@vue-flow/controls', '@vue-flow/minimap'],
     },
     server: {
       port: 5300,
@@ -45,7 +61,19 @@ export default defineConfig({
       },
     },
     ssr: {
-        noExternal: ['@ihxy/smart-workflow-designer', '@ihxy/workflow-core', '@vue-flow/core', '@vue-flow/background', '@vue-flow/controls', '@vue-flow/minimap'],
+      noExternal: [
+        '@ihxy/orcha-editor',
+        '@ihxy/orcha-vue',
+        '@ihxy/orcha-core',
+        '@ihxy/orcha-form',
+        '@ihxy/orcha-variable',
+        '@ihxy/orcha-plugins',
+        '@ihxy/orcha-materials',
+        '@vue-flow/core',
+        '@vue-flow/background',
+        '@vue-flow/controls',
+        '@vue-flow/minimap',
+      ],
     },
   },
 })

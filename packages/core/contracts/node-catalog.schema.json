@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Crayon-hua/smart-workflow-ui/contracts/node-catalog.schema.json",
+  "$id": "https://github.com/Crayon-hua/orcha/contracts/node-catalog.schema.json",
   "title": "Smart Workflow node catalog (catalogVersion 1.0)",
   "type": "object",
   "additionalProperties": false,

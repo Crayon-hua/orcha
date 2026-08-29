@@ -1,0 +1,50 @@
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
+import { libInjectCss } from 'vite-plugin-lib-inject-css'
+
+const root = dirname(fileURLToPath(import.meta.url))
+
+const externals = [
+  'vue',
+  '@vue-flow/core',
+  '@vue-flow/background',
+  '@vue-flow/controls',
+  '@vue-flow/minimap',
+]
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    libInjectCss(),
+    dts({
+      tsconfigPath: resolve(root, 'tsconfig.json'),
+      include: ['src/**/*.ts', 'src/**/*.vue'],
+      exclude: ['src/env.d.ts', 'src/**/__tests__/**', 'src/**/*.test.ts'],
+    }),
+  ],
+  build: {
+    lib: {
+      entry: resolve(root, 'src/index.ts'),
+      formats: ['es'],
+      fileName: 'index',
+    },
+    rollupOptions: {
+      external: (id) => {
+        if (id.startsWith('@ihxy/orcha-')) {
+          return true
+        }
+        return externals.some(pkg => id === pkg || id.startsWith(`${pkg}/`))
+      },
+      output: {
+        inlineDynamicImports: true,
+        assetFileNames: 'style.css',
+      },
+    },
+    cssCodeSplit: true,
+    sourcemap: true,
+    emptyOutDir: true,
+  },
+})

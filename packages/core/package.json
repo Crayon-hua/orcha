@@ -1,23 +1,24 @@
 {
-  "name": "@ihxy/workflow-core",
+  "name": "@ihxy/orcha-core",
   "type": "module",
-  "version": "0.2.1",
-  "description": "工作流 JSON、节点 IO catalog 与图校验。无 Vue 依赖。",
+  "version": "0.1.0",
+  "description": "Orcha — workflow JSON, node IO catalog, and graph validation. No Vue.",
   "license": "Apache-2.0",
-  "homepage": "https://crayon-hua.github.io/smart-workflow-ui/",
+  "homepage": "https://crayon-hua.github.io/orcha/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Crayon-hua/smart-workflow-ui.git",
+    "url": "git+https://github.com/Crayon-hua/orcha.git",
     "directory": "packages/core"
   },
   "bugs": {
-    "url": "https://github.com/Crayon-hua/smart-workflow-ui/issues"
+    "url": "https://github.com/Crayon-hua/orcha/issues"
   },
   "keywords": [
+    "orcha",
     "workflow",
     "json",
     "catalog",
-    "schema"
+    "orchestration"
   ],
   "sideEffects": false,
   "exports": {
