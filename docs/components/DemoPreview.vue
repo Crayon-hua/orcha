@@ -67,7 +67,7 @@ const workflow = ref<WorkflowDefinition>(JSON.parse(JSON.stringify(sampleWorkflo
   border-radius: 0;
 }
 
-@media (max-width: 639px) {
+@media (width < 640px) {
   .demo-preview__paper {
     height: min(78vh, 640px);
     min-height: 480px;

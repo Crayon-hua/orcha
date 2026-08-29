@@ -174,8 +174,8 @@ onUnmounted(() => {
 .mini-node {
   padding: 6px 10px;
   color: var(--vp-c-text-1);
-  font-size: 12px;
   font-weight: 650;
+  font-size: 12px;
   white-space: nowrap;
   background: var(--vp-c-bg);
   border: 1px solid var(--vp-c-divider);
@@ -245,8 +245,8 @@ onUnmounted(() => {
 .example-card__open {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   align-self: flex-start;
+  justify-content: center;
   height: 40px;
   padding: 0 16px;
   color: #fff;
@@ -311,7 +311,7 @@ onUnmounted(() => {
   min-height: 0;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .example-gallery {
     grid-template-columns: 1fr 1fr;
   }
