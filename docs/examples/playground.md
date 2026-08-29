@@ -4,8 +4,10 @@ import DemoPreview from '../components/DemoPreview.vue'
 
 # Playground
 
-Built-in nodes plus a custom Approval node. Drag from the palette, edit properties, export JSON.
+内置节点加上自定义「审批」节点。从左侧拖节点、改属性、导出 JSON。
 
 <ClientOnly>
-  <DemoPreview />
+  <div class="orcha-playground">
+    <DemoPreview />
+  </div>
 </ClientOnly>

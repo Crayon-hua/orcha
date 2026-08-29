@@ -9,11 +9,11 @@
 Orcha is an **extensible visual orchestration framework for Vue**.
 It is a composable toolkit—canvas, node forms, design-time variables, plugins, and materials—so you can build a workflow designer into your own product. It is **not** a ready-made workflow SaaS.
 
-Learn more at [Orcha docs 🌐](https://crayon-hua.github.io/orcha/)
+Learn more at [Orcha docs 🌐](https://crayon-hua.github.io/orcha/en/)
 
 ## 🎬 Demo
 
-Run the playground locally, or open the [live demo](https://crayon-hua.github.io/orcha/examples/playground.html) on the docs site.
+Run the playground locally, or open the [live demo](https://crayon-hua.github.io/orcha/en/examples/playground.html) on the docs site.
 
 ```sh
 pnpm install
@@ -58,12 +58,12 @@ JSON-only parse/validate (no canvas): `pnpm add @ihxy/orcha-core`.
 
 | Feature | Description |
 | --- | --- |
-| [Canvas](https://crayon-hua.github.io/orcha/guide/canvas.html) | Vue Flow as the canvas kernel (grid, Controls, MiniMap), assembled by `@ihxy/orcha-vue`. |
-| [Form](https://crayon-hua.github.io/orcha/guide/form.html) | `FormSchema` / `FormRenderer` drive the property panel. |
-| [Variable](https://crayon-hua.github.io/orcha/guide/variable.html) | Design-time upstream outputs and `{{ nodeId.output }}` insertion. Does not execute. |
-| [Materials](https://crayon-hua.github.io/orcha/materials/introduction.html) | Built-in start / end / task / condition; extend with `defineNodeType`. |
-| [Plugins](https://crayon-hua.github.io/orcha/guide/plugins.html) | History, copy-paste, and keyboard shortcuts in one package. |
-| [Document](https://crayon-hua.github.io/orcha/guide/getting-started.html) | Versioned `WorkflowDefinition` JSON 1.0 + node IO catalog. Runtime consumes JSON, not Vue Flow internals. |
+| [Canvas](https://crayon-hua.github.io/orcha/en/guide/canvas.html) | Vue Flow as the canvas kernel (grid, Controls, MiniMap), assembled by `@ihxy/orcha-vue`. |
+| [Form](https://crayon-hua.github.io/orcha/en/guide/form.html) | `FormSchema` / `FormRenderer` drive the property panel. |
+| [Variable](https://crayon-hua.github.io/orcha/en/guide/variable.html) | Design-time upstream outputs and `{{ nodeId.output }}` insertion. Does not execute. |
+| [Materials](https://crayon-hua.github.io/orcha/en/materials/introduction.html) | Built-in start / end / task / condition; extend with `defineNodeType`. |
+| [Plugins](https://crayon-hua.github.io/orcha/en/guide/plugins.html) | History, copy-paste, and keyboard shortcuts in one package. |
+| [Document](https://crayon-hua.github.io/orcha/en/guide/getting-started.html) | Versioned `WorkflowDefinition` JSON 1.0 + node IO catalog. Runtime consumes JSON, not Vue Flow internals. |
 
 ## 📦 Packages
 
@@ -79,11 +79,11 @@ JSON-only parse/validate (no canvas): `pnpm add @ihxy/orcha-core`.
 
 ## 📖 Documentation
 
-Full docs: [https://crayon-hua.github.io/orcha/](https://crayon-hua.github.io/orcha/)
+Full docs: [https://crayon-hua.github.io/orcha/en/](https://crayon-hua.github.io/orcha/en/)
 
-- [Introduction](https://crayon-hua.github.io/orcha/)
-- [Install & usage](https://crayon-hua.github.io/orcha/guide/getting-started.html)
-- [Live demo](https://crayon-hua.github.io/orcha/examples/playground.html)
+- [Introduction](https://crayon-hua.github.io/orcha/en/)
+- [Install & usage](https://crayon-hua.github.io/orcha/en/guide/getting-started.html)
+- [Live demo](https://crayon-hua.github.io/orcha/en/examples/playground.html)
 
 Local docs: `pnpm docs:dev` → [http://localhost:5300](http://localhost:5300).
 

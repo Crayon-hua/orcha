@@ -1,5 +1,5 @@
-# Canvas
+# 画布
 
-`@ihxy/orcha-vue` wraps Vue Flow: `WorkflowCanvas`, node registry, and re-exports of `Handle` / `Position` / `useVueFlow`.
+`@ihxy/orcha-vue` 封装 Vue Flow：`WorkflowCanvas`、节点注册，并再导出 `Handle` / `Position` / `useVueFlow`。
 
-This page is a stub. Content will be added later.
+本页为占位，内容稍后补充。

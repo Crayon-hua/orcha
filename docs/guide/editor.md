@@ -1,14 +1,14 @@
-# Editor
+# 编辑器
 
-`@ihxy/orcha-editor` assembles the palette, canvas, property panel, and toolbar.
+`@ihxy/orcha-editor` 拼装节点面板、画布、属性面板和工具栏。
 
-This page is a stub. Content will be added later.
+本页为占位，内容稍后补充。
 
-## Props (preview)
+## Props（预览）
 
-| Prop | Type | Description |
+| Prop | 类型 | 说明 |
 | --- | --- | --- |
-| `modelValue` / `v-model` | `WorkflowDefinition` | Workflow JSON |
-| `nodeTypes` | `NodeTypeDefinition[]` | Extra custom nodes |
-| `readonly` / `v-model:readonly` | `boolean` | Read-only mode |
-| `flowId` | `string` | Optional Vue Flow store id |
+| `modelValue` / `v-model` | `WorkflowDefinition` | 工作流 JSON |
+| `nodeTypes` | `NodeTypeDefinition[]` | 追加自定义节点 |
+| `readonly` / `v-model:readonly` | `boolean` | 只读模式 |
+| `flowId` | `string` | 可选，多实例时区分 Vue Flow store |

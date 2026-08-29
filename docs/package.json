@@ -10,9 +10,11 @@
   "dependencies": {
     "@ihxy/orcha-editor": "workspace:*",
     "@ihxy/orcha-vue": "workspace:*",
+    "three": "^0.185.1",
     "vue": "^3.5.18"
   },
   "devDependencies": {
+    "@types/three": "^0.185.4",
     "vitepress": "^1.6.4"
   }
 }

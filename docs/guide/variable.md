@@ -1,5 +1,5 @@
-# Variable
+# 变量
 
-`@ihxy/orcha-variable` lists design-time upstream outputs and helpers for mustache templates. It does not execute expressions.
+`@ihxy/orcha-variable` 提供设计态上游输出，以及 mustache 模板辅助。不执行表达式。
 
-This page is a stub. Content will be added later.
+本页为占位，内容稍后补充。

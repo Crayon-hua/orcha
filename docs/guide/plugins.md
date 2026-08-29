@@ -1,5 +1,5 @@
-# Plugins
+# 插件
 
-`@ihxy/orcha-plugins` ships plugin lifecycle plus history, copy-paste, and keyboard shortcuts in one package.
+`@ihxy/orcha-plugins` 包含插件生命周期，以及撤销重做、复制粘贴、快捷键。
 
-This page is a stub. Content will be added later.
+本页为占位，内容稍后补充。
