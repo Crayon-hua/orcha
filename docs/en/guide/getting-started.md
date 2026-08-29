@@ -35,7 +35,7 @@ Prefer `form` / `ports` / `inputs` / `outputs`. Legacy `fields` and `handles` ar
 
 In custom node components, import `Handle` from `@ihxy/orcha-vue`, not `@vue-flow/core`.
 
-See the [live playground](/en/examples/playground).
+See the [examples](/en/examples/).
 
 ## Next
 

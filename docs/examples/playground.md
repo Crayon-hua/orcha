@@ -1,13 +1,17 @@
+---
+title: 示例
+---
+
 <script setup>
-import DemoPreview from '../components/DemoPreview.vue'
+import { onMounted } from 'vue'
+import { useData, useRouter } from 'vitepress'
+
+const { lang } = useData()
+const router = useRouter()
+
+onMounted(() => {
+  router.go(lang.value.startsWith('zh') ? '/examples/' : '/en/examples/')
+})
 </script>
 
-# Playground
-
-内置节点加上自定义「审批」节点。从左侧拖节点、改属性、导出 JSON。
-
-<ClientOnly>
-  <div class="orcha-playground">
-    <DemoPreview />
-  </div>
-</ClientOnly>
+正在前往[示例](/examples/)。

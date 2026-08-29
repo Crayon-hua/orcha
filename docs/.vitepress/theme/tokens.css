@@ -1,0 +1,96 @@
+/**
+ * Orcha 文档独立配色。
+ * 参考数据中枢：青蓝主色、数据流青色、冷灰中性色，不用 FlowGram 紫渐变。
+ */
+:root {
+  --orcha-brand: #1677ff;
+  --orcha-brand-hover: #4096ff;
+  --orcha-brand-active: #0958d9;
+  --orcha-brand-soft: rgb(22 119 255 / 12%);
+  --orcha-accent: #13c2c2;
+  --orcha-accent-strong: #08979c;
+  --orcha-success: #00a870;
+  --orcha-warning: #ed7b2f;
+  --orcha-danger: #d54941;
+  --orcha-idle: #8b95a7;
+  --orcha-navy: #0b1f3a;
+  --orcha-line: #5b6b82;
+  --orcha-port: #94a3b8;
+  --orcha-node-1: #1677ff;
+  --orcha-node-2: #3c9eff;
+  --orcha-node-3: #13c2c2;
+  --orcha-node-4: #36cfc9;
+  --orcha-grad: linear-gradient(90deg, var(--orcha-brand) 0%, var(--orcha-accent) 100%);
+  --orcha-mesh:
+    radial-gradient(42.12% 56.13% at 100% 0%, rgb(22 119 255 / 12%) 0%, rgb(255 255 255 / 0%) 100%),
+    radial-gradient(42.01% 79.63% at 52.86% 0%, rgb(19 194 194 / 14%) 0%, rgb(255 255 255 / 0%) 100%),
+    radial-gradient(79.67% 58.09% at 0% 0%, rgb(22 119 255 / 16%) 0%, rgb(255 255 255 / 0%) 100%);
+  --orcha-radius: 16px;
+  --orcha-radius-pill: 999px;
+
+  --vp-c-brand-1: var(--orcha-brand);
+  --vp-c-brand-2: var(--orcha-brand-hover);
+  --vp-c-brand-3: var(--orcha-brand-active);
+  --vp-c-brand-soft: var(--orcha-brand-soft);
+  --vp-c-bg: #f5f8fc;
+  --vp-c-bg-alt: #eaf1f8;
+  --vp-c-bg-elv: #ffffff;
+  --vp-c-bg-soft: #eef3f8;
+  --vp-c-text-1: #1d2b3a;
+  --vp-c-text-2: #4e5d70;
+  --vp-c-text-3: #7b8798;
+  --vp-c-divider: #d7e1ec;
+  --vp-c-gutter: #e4ecf4;
+  --vp-c-border: #d7e1ec;
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: var(--orcha-grad);
+  --vp-button-brand-bg: var(--orcha-brand);
+  --vp-button-brand-hover-bg: var(--orcha-brand-hover);
+  --vp-button-brand-active-bg: var(--orcha-brand-active);
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-text: #fff;
+  --vp-button-alt-bg: #e8eef6;
+  --vp-button-alt-hover-bg: #dde6f1;
+  --vp-button-alt-text: var(--vp-c-text-1);
+  --orcha-nav-bg: var(--vp-c-bg);
+  --vp-nav-bg-color: var(--vp-c-bg);
+  --vp-sidebar-bg-color: var(--vp-c-bg);
+}
+
+html.dark {
+  --orcha-brand: #3c9eff;
+  --orcha-brand-hover: #69b1ff;
+  --orcha-brand-active: #1677ff;
+  --orcha-brand-soft: rgb(60 158 255 / 18%);
+  --orcha-accent: #36cfc9;
+  --orcha-accent-strong: #13c2c2;
+  --orcha-success: #3dd68c;
+  --orcha-warning: #ff9a2e;
+  --orcha-danger: #f76965;
+  --orcha-idle: #8b95a7;
+  --orcha-line: #93a4bb;
+  --orcha-port: #64748b;
+  --orcha-node-1: #3c9eff;
+  --orcha-node-2: #69b1ff;
+  --orcha-node-3: #36cfc9;
+  --orcha-node-4: #5cdbd3;
+  --orcha-mesh:
+    radial-gradient(42.12% 56.13% at 100% 0%, rgb(60 158 255 / 16%) 0%, rgb(0 0 0 / 0%) 100%),
+    radial-gradient(42.01% 79.63% at 52.86% 0%, rgb(54 207 201 / 14%) 0%, rgb(0 0 0 / 0%) 100%),
+    radial-gradient(79.67% 58.09% at 0% 0%, rgb(22 119 255 / 18%) 0%, rgb(0 0 0 / 0%) 100%);
+
+  --vp-c-bg: #0b1220;
+  --vp-c-bg-alt: #111a2b;
+  --vp-c-bg-elv: #152033;
+  --vp-c-bg-soft: #111a2b;
+  --vp-c-text-1: #e8eef6;
+  --vp-c-text-2: #a8b6c8;
+  --vp-c-text-3: #7d8ca0;
+  --vp-c-divider: #243247;
+  --vp-c-gutter: #152033;
+  --vp-c-border: #243247;
+  --vp-button-alt-bg: #1b2740;
+  --vp-button-alt-hover-bg: #243247;
+}

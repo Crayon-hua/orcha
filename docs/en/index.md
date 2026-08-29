@@ -16,8 +16,8 @@ hero:
       text: GitHub
       link: https://github.com/Crayon-hua/orcha
     - theme: alt
-      text: Live Demo
-      link: /en/examples/playground
+      text: Examples
+      link: /en/examples/
 
 features:
   - title: Canvas

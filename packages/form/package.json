@@ -1,7 +1,7 @@
 {
   "name": "@ihxy/orcha-form",
   "type": "module",
-  "version": "0.2.4",
+  "version": "0.2.6",
   "description": "Orcha — FormSchema, FormModel, and FormRenderer for node property panels.",
   "license": "Apache-2.0",
   "homepage": "https://crayon-hua.github.io/orcha/",
