@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useData } from 'vitepress'
+import type {
+  BufferGeometry,
+  Material,
+  Mesh,
+  MeshStandardMaterial,
+  QuadraticBezierCurve3,
+} from 'three'
 
 type ThreeModule = typeof import('three')
 
@@ -97,9 +104,9 @@ function createFlowScene(
   scene.add(fill)
 
   const nodeGroup = new THREE.Group()
-  const meshes: THREE.Mesh[] = []
-  const materials: THREE.Material[] = []
-  const geometries: THREE.BufferGeometry[] = []
+  const meshes: Mesh[] = []
+  const materials: Material[] = []
+  const geometries: BufferGeometry[] = []
 
   for (const node of GRAPH_NODES) {
     const color = KIND_COLOR[node.kind]
@@ -112,7 +119,7 @@ function createFlowScene(
   }
   scene.add(nodeGroup)
 
-  const curves: THREE.QuadraticBezierCurve3[] = []
+  const curves: QuadraticBezierCurve3[] = []
   const edgeColor = dark ? 0x93c5fd : 0x2563eb
   for (const [from, to] of GRAPH_EDGES) {
     const a = new THREE.Vector3(...GRAPH_NODES[from].pos)
@@ -139,7 +146,7 @@ function createFlowScene(
 
   const particleGeo = new THREE.SphereGeometry(0.045, 12, 12)
   geometries.push(particleGeo)
-  const particles: Array<{ mesh: THREE.Mesh; curve: THREE.QuadraticBezierCurve3; t: number; speed: number }> = []
+  const particles: Array<{ mesh: Mesh; curve: QuadraticBezierCurve3; t: number; speed: number }> = []
   curves.forEach((curve, index) => {
     const count = 2
     for (let i = 0; i < count; i += 1) {
@@ -222,8 +229,8 @@ function createNodeMesh(
   kind: GraphNode['kind'],
   color: number,
   dark: boolean,
-): { mesh: THREE.Mesh; geo: THREE.BufferGeometry; mat: THREE.MeshStandardMaterial } {
-  let geo: THREE.BufferGeometry
+): { mesh: Mesh; geo: BufferGeometry; mat: MeshStandardMaterial } {
+  let geo: BufferGeometry
   if (kind === 'start' || kind === 'end') {
     geo = new THREE.SphereGeometry(0.22, 28, 20)
   }
