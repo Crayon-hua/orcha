@@ -149,3 +149,7 @@ const payload = toRuntimePayload(workflow, builtinNodeCatalog)
 ## 服务端渲染
 
 本组件只能在浏览器里运行。如果项目会先在服务端出 HTML（例如 Nuxt），请把组件包在 `ClientOnly` 里。
+
+## 下一步
+
+打开 [示例](/examples/)，在全屏画布里拖节点、改属性、导出 JSON。

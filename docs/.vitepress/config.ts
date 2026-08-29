@@ -13,14 +13,14 @@ const github = 'https://github.com/Crayon-hua/orcha'
 const enNav = [
   { text: 'Guide', link: '/en/guide/getting-started' },
   { text: 'Materials', link: '/en/materials/introduction' },
-  { text: 'Examples', link: '/en/examples/playground' },
+  { text: 'Examples', link: '/en/examples/' },
   { text: 'API', link: '/en/api/' },
 ]
 
 const zhNav = [
   { text: '指引', link: '/guide/getting-started' },
   { text: '物料', link: '/materials/introduction' },
-  { text: '例子', link: '/examples/playground' },
+  { text: '示例', link: '/examples/' },
   { text: 'API', link: '/api/' },
 ]
 
@@ -55,7 +55,7 @@ const enSidebar = {
     {
       text: 'Examples',
       items: [
-        { text: 'Playground', link: '/en/examples/playground' },
+        { text: 'Overview', link: '/en/examples/' },
       ],
     },
   ],
@@ -98,9 +98,9 @@ const zhSidebar = {
   ],
   '/examples/': [
     {
-      text: '例子',
+      text: '示例',
       items: [
-        { text: 'Playground', link: '/examples/playground' },
+        { text: '概览', link: '/examples/' },
       ],
     },
   ],
@@ -206,7 +206,6 @@ export default defineConfig({
         '@vue-flow/background',
         '@vue-flow/controls',
         '@vue-flow/minimap',
-        'three',
       ],
     },
     server: {

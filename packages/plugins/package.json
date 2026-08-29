@@ -1,7 +1,7 @@
 {
   "name": "@ihxy/orcha-plugins",
   "type": "module",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Orcha — plugin lifecycle plus history, copy-paste, and keyboard shortcuts.",
   "license": "Apache-2.0",
   "homepage": "https://crayon-hua.github.io/orcha/",

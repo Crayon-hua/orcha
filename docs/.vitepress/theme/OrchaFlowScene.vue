@@ -1,258 +1,216 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useData } from 'vitepress'
-import type {
-  BufferGeometry,
-  Material,
-  Mesh,
-  MeshStandardMaterial,
-  QuadraticBezierCurve3,
-} from 'three'
 
-type ThreeModule = typeof import('three')
-
-interface GraphNode {
-  kind: 'start' | 'task' | 'condition' | 'approval' | 'end'
-  pos: [number, number, number]
+interface Pill {
+  x: number
+  y: number
+  h: number
+  color: string
 }
 
-const GRAPH_NODES: GraphNode[] = [
-  { kind: 'start', pos: [-3.15, 0.35, 0] },
-  { kind: 'task', pos: [-1.35, 0.5, 0.12] },
-  { kind: 'condition', pos: [0.35, 0.28, 0] },
-  { kind: 'approval', pos: [1.95, 1.2, 0.18] },
-  { kind: 'task', pos: [1.9, -0.78, -0.08] },
-  { kind: 'end', pos: [3.55, 1.15, 0] },
-  { kind: 'end', pos: [3.5, -0.72, 0] },
+const STAGE_W = 420
+const STAGE_H = 280
+const PILL_W = 48
+const TICK_MS = 5000
+const PORTS = [24, 80, 128, 188, 236, 284, 332, 396]
+const POSES: Pill[][] = [
+  [
+    { x: 56, y: 70, h: 140, color: 'var(--orcha-idle)' },
+    { x: 140, y: 70, h: 140, color: 'var(--orcha-idle)' },
+    { x: 224, y: 70, h: 140, color: 'var(--orcha-idle)' },
+    { x: 308, y: 70, h: 140, color: 'var(--orcha-idle)' },
+  ],
+  [
+    { x: 56, y: 56, h: 168, color: 'var(--orcha-node-1)' },
+    { x: 140, y: 35, h: 210, color: 'var(--orcha-node-2)' },
+    { x: 224, y: 75, h: 130, color: 'var(--orcha-node-3)' },
+    { x: 308, y: 50, h: 180, color: 'var(--orcha-node-4)' },
+  ],
+  [
+    { x: 48, y: 28, h: 224, color: 'var(--orcha-node-1)' },
+    { x: 132, y: 90, h: 100, color: 'var(--orcha-warning)' },
+    { x: 228, y: 48, h: 184, color: 'var(--orcha-node-2)' },
+    { x: 316, y: 80, h: 120, color: 'var(--orcha-accent)' },
+  ],
+  [
+    { x: 56, y: 60, h: 160, color: 'var(--orcha-success)' },
+    { x: 140, y: 55, h: 170, color: 'var(--orcha-accent-strong)' },
+    { x: 224, y: 62, h: 156, color: 'var(--orcha-node-3)' },
+    { x: 308, y: 58, h: 164, color: 'var(--orcha-node-4)' },
+  ],
 ]
 
-const GRAPH_EDGES: Array<[number, number]> = [
-  [0, 1],
-  [1, 2],
-  [2, 3],
-  [2, 4],
-  [3, 5],
-  [4, 6],
-]
+const { lang } = useData()
+const zh = computed(() => lang.value.startsWith('zh'))
+const reduced = ref(false)
+const poseIndex = ref(1)
+const live = ref<Pill[]>(clonePose(1))
+const dragIndex = ref<number | null>(null)
+const stage = ref<HTMLElement | null>(null)
 
-const KIND_COLOR: Record<GraphNode['kind'], number> = {
-  start: 0x10b981,
-  task: 0x3b82f6,
-  condition: 0xf59e0b,
-  approval: 0x7c3aed,
-  end: 0xef4444,
-}
-
-const host = ref<HTMLDivElement | null>(null)
-const { isDark, lang } = useData()
-const caption = computed(() => (
-  lang.value.startsWith('zh') ? '编排流动 · Three.js' : 'Orchestration flow · Three.js'
+const hint = computed(() => (
+  zh.value
+    ? '可拖拽节点试试。到点会自动回到当前状态。'
+    : 'Drag the nodes. They snap back on the next beat.'
 ))
 
-let disposeScene: (() => void) | undefined
-let bootGeneration = 0
+let timer = 0
+let origin = { x: 0, y: 0, px: 0, py: 0 }
+
+function clonePose(index: number): Pill[] {
+  return POSES[index].map(pill => ({ ...pill }))
+}
+
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, value))
+}
+
+function pillStyle(pill: Pill): Record<string, string> {
+  return {
+    left: `${(pill.x / STAGE_W) * 100}%`,
+    top: `${(pill.y / STAGE_H) * 100}%`,
+    width: `${(PILL_W / STAGE_W) * 100}%`,
+    height: `${(pill.h / STAGE_H) * 100}%`,
+    backgroundColor: pill.color,
+  }
+}
+
+function applyPose(index: number): void {
+  poseIndex.value = index
+  live.value = clonePose(index)
+}
+
+function advance(): void {
+  dragIndex.value = null
+  applyPose((poseIndex.value + 1) % POSES.length)
+}
+
+function schedule(): void {
+  window.clearInterval(timer)
+  if (reduced.value) {
+    return
+  }
+  timer = window.setInterval(advance, TICK_MS)
+}
+
+function jump(index: number): void {
+  dragIndex.value = null
+  applyPose(index)
+  schedule()
+}
+
+function toLocal(event: PointerEvent): { x: number, y: number } {
+  const rect = stage.value!.getBoundingClientRect()
+  return {
+    x: ((event.clientX - rect.left) / rect.width) * STAGE_W,
+    y: ((event.clientY - rect.top) / rect.height) * STAGE_H,
+  }
+}
+
+function onPointerDown(index: number, event: PointerEvent): void {
+  const target = event.currentTarget as HTMLElement
+  try {
+    target.setPointerCapture(event.pointerId)
+  }
+  catch {
+    // 合成事件或不支持 capture 时仍可拖拽
+  }
+  event.preventDefault()
+  dragIndex.value = index
+  const local = toLocal(event)
+  origin = {
+    x: live.value[index].x,
+    y: live.value[index].y,
+    px: local.x,
+    py: local.y,
+  }
+}
+
+function onPointerMove(event: PointerEvent): void {
+  if (dragIndex.value === null || !stage.value) {
+    return
+  }
+  const index = dragIndex.value
+  const local = toLocal(event)
+  const node = live.value[index]
+  node.x = clamp(origin.x + local.x - origin.px, 8, STAGE_W - PILL_W - 8)
+  node.y = clamp(origin.y + local.y - origin.py, 8, STAGE_H - node.h - 8)
+}
+
+function onPointerUp(): void {
+  dragIndex.value = null
+}
 
 onMounted(() => {
-  void boot()
+  reduced.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (reduced.value) {
+    applyPose(1)
+    return
+  }
+  schedule()
 })
 
 onUnmounted(() => {
-  bootGeneration += 1
-  disposeScene?.()
+  window.clearInterval(timer)
 })
-
-watch(isDark, () => {
-  disposeScene?.()
-  void boot()
-})
-
-async function boot(): Promise<void> {
-  const el = host.value
-  if (!el) {
-    return
-  }
-  const generation = ++bootGeneration
-  const THREE = await import('three')
-  if (generation !== bootGeneration || host.value !== el) {
-    return
-  }
-  disposeScene?.()
-  disposeScene = createFlowScene(THREE, el, isDark.value)
-}
-
-function createFlowScene(
-  THREE: ThreeModule,
-  el: HTMLDivElement,
-  dark: boolean,
-): () => void {
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  const scene = new THREE.Scene()
-  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 40)
-  camera.position.set(0.4, 1.15, 7.4)
-
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-  renderer.setClearColor(0x000000, 0)
-  el.append(renderer.domElement)
-
-  scene.add(new THREE.AmbientLight(0xffffff, dark ? 0.55 : 0.72))
-  const key = new THREE.DirectionalLight(0xffffff, dark ? 1.05 : 0.85)
-  key.position.set(3.2, 5.2, 4.5)
-  scene.add(key)
-  const fill = new THREE.PointLight(0x60a5fa, dark ? 1.4 : 0.7, 18)
-  fill.position.set(-2.4, 1.6, 2.2)
-  scene.add(fill)
-
-  const nodeGroup = new THREE.Group()
-  const meshes: Mesh[] = []
-  const materials: Material[] = []
-  const geometries: BufferGeometry[] = []
-
-  for (const node of GRAPH_NODES) {
-    const color = KIND_COLOR[node.kind]
-    const { mesh, geo, mat } = createNodeMesh(THREE, node.kind, color, dark)
-    mesh.position.set(...node.pos)
-    nodeGroup.add(mesh)
-    meshes.push(mesh)
-    materials.push(mat)
-    geometries.push(geo)
-  }
-  scene.add(nodeGroup)
-
-  const curves: QuadraticBezierCurve3[] = []
-  const edgeColor = dark ? 0x93c5fd : 0x2563eb
-  for (const [from, to] of GRAPH_EDGES) {
-    const a = new THREE.Vector3(...GRAPH_NODES[from].pos)
-    const b = new THREE.Vector3(...GRAPH_NODES[to].pos)
-    const mid = a.clone().lerp(b, 0.5)
-    mid.y += 0.35 + Math.abs(b.x - a.x) * 0.08
-    mid.z += (from % 2 === 0 ? 0.28 : -0.22)
-    const curve = new THREE.QuadraticBezierCurve3(a, mid, b)
-    curves.push(curve)
-    const tube = new THREE.TubeGeometry(curve, 48, 0.018, 8, false)
-    const tubeMat = new THREE.MeshStandardMaterial({
-      color: edgeColor,
-      transparent: true,
-      opacity: dark ? 0.42 : 0.28,
-      roughness: 0.35,
-      metalness: 0.15,
-      emissive: edgeColor,
-      emissiveIntensity: dark ? 0.35 : 0.12,
-    })
-    nodeGroup.add(new THREE.Mesh(tube, tubeMat))
-    geometries.push(tube)
-    materials.push(tubeMat)
-  }
-
-  const particleGeo = new THREE.SphereGeometry(0.045, 12, 12)
-  geometries.push(particleGeo)
-  const particles: Array<{ mesh: Mesh; curve: QuadraticBezierCurve3; t: number; speed: number }> = []
-  curves.forEach((curve, index) => {
-    const count = 2
-    for (let i = 0; i < count; i += 1) {
-      const mat = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: dark ? 0.95 : 0.85,
-      })
-      const mesh = new THREE.Mesh(particleGeo, mat)
-      materials.push(mat)
-      nodeGroup.add(mesh)
-      particles.push({
-        mesh,
-        curve,
-        t: (i / count + index * 0.13) % 1,
-        speed: 0.18 + (index % 3) * 0.04,
-      })
-    }
-  })
-
-  const pointer = { x: 0, y: 0 }
-  const onPointerMove = (event: PointerEvent): void => {
-    const rect = el.getBoundingClientRect()
-    pointer.x = ((event.clientX - rect.left) / rect.width - 0.5) * 2
-    pointer.y = ((event.clientY - rect.top) / rect.height - 0.5) * 2
-  }
-  el.addEventListener('pointermove', onPointerMove)
-
-  const resize = (): void => {
-    const width = el.clientWidth || 1
-    const height = el.clientHeight || 1
-    camera.aspect = width / height
-    camera.updateProjectionMatrix()
-    renderer.setSize(width, height, false)
-  }
-  const observer = new ResizeObserver(resize)
-  observer.observe(el)
-  resize()
-
-  const clock = new THREE.Clock()
-  let frame = 0
-  const tick = (): void => {
-    const dt = Math.min(clock.getDelta(), 0.033)
-    const t = clock.elapsedTime
-    if (!reduced) {
-      nodeGroup.rotation.y = THREE.MathUtils.lerp(nodeGroup.rotation.y, pointer.x * 0.18, 0.06)
-      nodeGroup.rotation.x = THREE.MathUtils.lerp(nodeGroup.rotation.x, pointer.y * -0.1, 0.06)
-      meshes.forEach((mesh, i) => {
-        const pulse = 1 + Math.sin(t * 1.6 + i * 0.7) * 0.035
-        mesh.scale.setScalar(pulse)
-        mesh.position.y = GRAPH_NODES[i].pos[1] + Math.sin(t * 1.1 + i) * 0.04
-      })
-      particles.forEach((p) => {
-        p.t = (p.t + p.speed * dt) % 1
-        p.curve.getPoint(p.t, p.mesh.position)
-        const scale = 0.7 + Math.sin(p.t * Math.PI) * 0.55
-        p.mesh.scale.setScalar(scale)
-      })
-      camera.position.x = 0.4 + Math.sin(t * 0.18) * 0.15
-      camera.lookAt(0.2, 0.25, 0)
-    }
-    renderer.render(scene, camera)
-    frame = window.requestAnimationFrame(tick)
-  }
-  frame = window.requestAnimationFrame(tick)
-
-  return () => {
-    window.cancelAnimationFrame(frame)
-    observer.disconnect()
-    el.removeEventListener('pointermove', onPointerMove)
-    renderer.dispose()
-    renderer.domElement.remove()
-    geometries.forEach((g) => g.dispose())
-    materials.forEach((m) => m.dispose())
-  }
-}
-
-function createNodeMesh(
-  THREE: ThreeModule,
-  kind: GraphNode['kind'],
-  color: number,
-  dark: boolean,
-): { mesh: Mesh; geo: BufferGeometry; mat: MeshStandardMaterial } {
-  let geo: BufferGeometry
-  if (kind === 'start' || kind === 'end') {
-    geo = new THREE.SphereGeometry(0.22, 28, 20)
-  }
-  else if (kind === 'condition') {
-    geo = new THREE.OctahedronGeometry(0.28)
-  }
-  else {
-    geo = new THREE.BoxGeometry(0.52, 0.32, 0.32)
-  }
-  const mat = new THREE.MeshStandardMaterial({
-    color,
-    roughness: 0.28,
-    metalness: 0.22,
-    emissive: color,
-    emissiveIntensity: dark ? 0.45 : 0.18,
-  })
-  return { mesh: new THREE.Mesh(geo, mat), geo, mat }
-}
 </script>
 
 <template>
-  <div ref="host" class="orcha-flow-scene" aria-hidden="true">
-    <p class="orcha-flow-scene__caption">{{ caption }}</p>
+  <div class="orcha-flow-mark">
+    <div
+      ref="stage"
+      class="orcha-flow-mark__stage"
+      role="img"
+      :aria-label="hint"
+    >
+      <svg
+        class="orcha-flow-mark__guide"
+        viewBox="0 0 420 280"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <rect x="24" y="139" width="372" height="2" rx="1" fill="currentColor" />
+        <circle
+          v-for="x in PORTS"
+          :key="x"
+          :cx="x"
+          cy="140"
+          r="6"
+          fill="#fff"
+          stroke="var(--orcha-port)"
+          stroke-width="2"
+        />
+        <circle v-if="reduced" cx="236" cy="140" r="3.5" fill="var(--orcha-brand)" />
+        <circle v-else r="3.5" fill="var(--orcha-brand)">
+          <animateMotion dur="3.6s" repeatCount="indefinite" path="M24 140 H396" />
+        </circle>
+      </svg>
+      <div
+        v-for="(pill, index) in live"
+        :key="index"
+        class="orcha-flow-pill"
+        :class="{ 'is-dragging': dragIndex === index }"
+        :style="pillStyle(pill)"
+        @pointerdown="onPointerDown(index, $event)"
+        @pointermove="onPointerMove"
+        @pointerup="onPointerUp"
+        @pointercancel="onPointerUp"
+      />
+    </div>
+    <div class="orcha-flow-mark__dots" role="tablist" :aria-label="zh ? '演示状态' : 'Demo states'">
+      <button
+        v-for="(_, index) in POSES"
+        :key="index"
+        type="button"
+        class="orcha-flow-mark__dot"
+        :class="{ 'is-active': poseIndex === index }"
+        :aria-label="`${zh ? '状态' : 'State'} ${index + 1}`"
+        :aria-selected="poseIndex === index"
+        @click="jump(index)"
+      />
+    </div>
+    <p class="orcha-flow-mark__hint">{{ hint }}</p>
   </div>
 </template>

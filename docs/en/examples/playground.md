@@ -1,13 +1,16 @@
+---
+title: Examples
+---
+
 <script setup>
-import DemoPreview from '../../components/DemoPreview.vue'
+import { onMounted } from 'vue'
+import { useRouter } from 'vitepress'
+
+const router = useRouter()
+
+onMounted(() => {
+  router.go('/en/examples/')
+})
 </script>
 
-# Playground
-
-Built-in nodes plus a custom Approval node. Drag from the palette, edit properties, export JSON.
-
-<ClientOnly>
-  <div class="orcha-playground">
-    <DemoPreview />
-  </div>
-</ClientOnly>
+Redirecting to [Examples](/en/examples/).

@@ -23,12 +23,16 @@ const extraTypes = [
   }),
 ]
 
+defineProps<{
+  fill?: boolean
+}>()
+
 const readonly = ref(false)
 const workflow = ref<WorkflowDefinition>(JSON.parse(JSON.stringify(sampleWorkflow)) as WorkflowDefinition)
 </script>
 
 <template>
-  <div class="demo-preview">
+  <div class="demo-preview" :class="{ 'is-fill': fill }">
     <div class="demo-preview__paper">
       <WorkflowDesigner
         v-model="workflow"
@@ -61,5 +65,26 @@ const workflow = ref<WorkflowDefinition>(JSON.parse(JSON.stringify(sampleWorkflo
 .demo-preview__paper :deep(.sw-designer) {
   border: none;
   border-radius: 0;
+}
+
+@media (max-width: 639px) {
+  .demo-preview__paper {
+    height: min(78vh, 640px);
+    min-height: 480px;
+    border-radius: 12px;
+  }
+}
+
+.demo-preview.is-fill,
+.demo-preview.is-fill .demo-preview__paper {
+  height: 100%;
+  min-height: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.demo-preview.is-fill :deep(.sw-designer) {
+  height: 100%;
 }
 </style>

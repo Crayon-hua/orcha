@@ -1,7 +1,7 @@
 {
   "name": "@ihxy/orcha-variable",
   "type": "module",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Orcha — design-time upstream outputs and {{ }} template helpers. Does not execute.",
   "license": "Apache-2.0",
   "homepage": "https://crayon-hua.github.io/orcha/",

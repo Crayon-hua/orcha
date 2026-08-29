@@ -16,8 +16,8 @@ hero:
       text: GitHub
       link: https://github.com/Crayon-hua/orcha
     - theme: alt
-      text: 现场演示
-      link: /examples/playground
+      text: 示例
+      link: /examples/
 
 features:
   - title: 画布
