@@ -9,11 +9,11 @@
 Orcha 是一个**可扩展的 Vue 可视化编排框架**。
 它提供可组合的工具：画布、节点表单、设计态变量、插件与物料，用来把工作流设计器嵌进你自己的产品。这**不是**一套现成的工作流 SaaS。
 
-了解更多：[Orcha 文档 🌐](https://crayon-hua.github.io/orcha/zh/)
+了解更多：[Orcha 文档 🌐](https://crayon-hua.github.io/orcha/)
 
 ## 🎬 演示
 
-本地跑 playground，或打开文档站 [现场演示](https://crayon-hua.github.io/orcha/zh/examples/playground.html)。
+本地跑 playground，或打开文档站 [现场演示](https://crayon-hua.github.io/orcha/examples/playground.html)。
 
 ```sh
 pnpm install
@@ -58,12 +58,12 @@ import { Handle, Position } from '@ihxy/orcha-vue'
 
 | 特性 | 说明 |
 | --- | --- |
-| [画布](https://crayon-hua.github.io/orcha/zh/guide/canvas.html) | Vue Flow 仅作画布内核（网格、Controls、MiniMap），由 `@ihxy/orcha-vue` 默认装配。 |
-| [表单](https://crayon-hua.github.io/orcha/zh/guide/form.html) | `FormSchema` / `FormRenderer` 驱动属性面板。 |
-| [变量](https://crayon-hua.github.io/orcha/zh/guide/variable.html) | 设计态上游输出，支持插入 `{{ nodeId.output }}`。不执行表达式。 |
-| [物料](https://crayon-hua.github.io/orcha/zh/materials/introduction.html) | 内置开始 / 结束 / 任务 / 条件，可用 `defineNodeType` 扩展。 |
-| [插件](https://crayon-hua.github.io/orcha/zh/guide/plugins.html) | 撤销重做、复制粘贴、快捷键合成一包。 |
-| [文档模型](https://crayon-hua.github.io/orcha/zh/guide/getting-started.html) | 可版本化的 `WorkflowDefinition` JSON 1.0 + 节点 IO catalog。运行时消费 JSON，而不是 Vue Flow 内部结构。 |
+| [画布](https://crayon-hua.github.io/orcha/guide/canvas.html) | Vue Flow 仅作画布内核（网格、Controls、MiniMap），由 `@ihxy/orcha-vue` 默认装配。 |
+| [表单](https://crayon-hua.github.io/orcha/guide/form.html) | `FormSchema` / `FormRenderer` 驱动属性面板。 |
+| [变量](https://crayon-hua.github.io/orcha/guide/variable.html) | 设计态上游输出，支持插入 `{{ nodeId.output }}`。不执行表达式。 |
+| [物料](https://crayon-hua.github.io/orcha/materials/introduction.html) | 内置开始 / 结束 / 任务 / 条件，可用 `defineNodeType` 扩展。 |
+| [插件](https://crayon-hua.github.io/orcha/guide/plugins.html) | 撤销重做、复制粘贴、快捷键合成一包。 |
+| [文档模型](https://crayon-hua.github.io/orcha/guide/getting-started.html) | 可版本化的 `WorkflowDefinition` JSON 1.0 + 节点 IO catalog。运行时消费 JSON，而不是 Vue Flow 内部结构。 |
 
 ## 📦 包
 
@@ -79,11 +79,11 @@ import { Handle, Position } from '@ihxy/orcha-vue'
 
 ## 📖 文档
 
-完整文档：[https://crayon-hua.github.io/orcha/zh/](https://crayon-hua.github.io/orcha/zh/)
+完整文档：[https://crayon-hua.github.io/orcha/](https://crayon-hua.github.io/orcha/)
 
-- [简介](https://crayon-hua.github.io/orcha/zh/)
-- [安装与用法](https://crayon-hua.github.io/orcha/zh/guide/getting-started.html)
-- [现场演示](https://crayon-hua.github.io/orcha/zh/examples/playground.html)
+- [简介](https://crayon-hua.github.io/orcha/)
+- [安装与用法](https://crayon-hua.github.io/orcha/guide/getting-started.html)
+- [现场演示](https://crayon-hua.github.io/orcha/examples/playground.html)
 
 本地文档：`pnpm docs:dev` → [http://localhost:5300](http://localhost:5300)。
 

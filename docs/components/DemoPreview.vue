@@ -43,17 +43,23 @@ const workflow = ref<WorkflowDefinition>(JSON.parse(JSON.stringify(sampleWorkflo
 .demo-preview {
   display: flex;
   flex-direction: column;
-  gap: 12px;
   align-items: stretch;
 }
 
 .demo-preview__paper {
   box-sizing: border-box;
   width: 100%;
-  height: 560px;
+  height: min(74vh, 800px);
+  min-height: 640px;
   overflow: hidden;
-  background: #fff;
-  border: 1px solid #d1d9e0;
-  border-radius: 6px;
+  background: var(--vp-c-bg, #fff);
+  border: 1px solid var(--vp-c-divider, #d1d9e0);
+  border-radius: 16px;
+  box-shadow: 0 18px 50px rgb(15 23 42 / 8%);
+}
+
+.demo-preview__paper :deep(.sw-designer) {
+  border: none;
+  border-radius: 0;
 }
 </style>
