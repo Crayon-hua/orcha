@@ -1,20 +1,36 @@
-# Orcha
+# Orcha｜Visual orchestration framework for Vue
 
-**Orcha** — An extensible visual orchestration framework for Vue.
+[English](README.md) | [中文](README_ZH.md)
 
-本仓库是 pnpm workspace：可发布的库在 `packages/` 下七个 `@ihxy/orcha-*` 包，playground 与 VitePress 文档站各自独立成包。
+[![License](https://img.shields.io/github/license/Crayon-hua/orcha)](https://github.com/Crayon-hua/orcha/blob/main/LICENSE)
+[![npm](https://img.shields.io/npm/v/@ihxy/orcha-editor)](https://www.npmjs.com/package/@ihxy/orcha-editor)
+[![npm downloads](https://img.shields.io/npm/dm/@ihxy/orcha-editor)](https://www.npmjs.com/package/@ihxy/orcha-editor)
 
-## 安装
+Orcha is an **extensible visual orchestration framework for Vue**.
+It is a composable toolkit—canvas, node forms, design-time variables, plugins, and materials—so you can build a workflow designer into your own product. It is **not** a ready-made workflow SaaS.
 
-完整编辑器：
+Learn more at [Orcha docs 🌐](https://crayon-hua.github.io/orcha/)
 
-```bash
+## 🎬 Demo
+
+Run the playground locally, or open the [live demo](https://crayon-hua.github.io/orcha/examples/playground.html) on the docs site.
+
+```sh
+pnpm install
+pnpm dev
+```
+
+Then open [http://localhost:5200](http://localhost:5200). Drag nodes from the palette, edit properties, undo/redo, and import/export JSON.
+
+## 🚀 Quick Start
+
+1. Install the editor. `vue` is the only peer; do **not** install `@vue-flow/*` yourself.
+
+```sh
 pnpm add @ihxy/orcha-editor vue
 ```
 
-`vue` 是唯一 peer。不要自己装 `@vue-flow/*`（由 `@ihxy/orcha-vue` 带上）。只解析 / 校验工作流 JSON、不需要画布时，可单独安装 `@ihxy/orcha-core`。
-
-## 用法
+2. Mount the designer:
 
 ```vue
 <template>
@@ -25,89 +41,69 @@ pnpm add @ihxy/orcha-editor vue
 import { WorkflowDesigner, createEmptyWorkflow } from '@ihxy/orcha-editor'
 import { ref } from 'vue'
 
-const workflow = ref(createEmptyWorkflow('我的流程'))
+const workflow = ref(createEmptyWorkflow('My flow'))
 </script>
 ```
 
-组件会自行注入样式。也可以显式引入 `@ihxy/orcha-editor/style.css`。
-
-自定义节点的锚点从 `@ihxy/orcha-vue` 引入，不要从 `@vue-flow/core` 引：
+3. For custom node handles, import from `@ihxy/orcha-vue` (not `@vue-flow/core`):
 
 ```ts
 import { defineNodeType } from '@ihxy/orcha-editor'
 import { Handle, Position } from '@ihxy/orcha-vue'
-
-const extraTypes = [
-  defineNodeType({
-    type: 'approval',
-    label: '审批',
-    component: ApprovalNode,
-    palette: { group: '扩展' },
-    fields: [{ key: 'label', label: '名称', type: 'text' }],
-    handles: { target: true, source: true },
-    defaultData: { label: '审批' },
-  }),
-]
 ```
 
-```vue
-<WorkflowDesigner v-model="workflow" :node-types="extraTypes" />
-```
+JSON-only parse/validate (no canvas): `pnpm add @ihxy/orcha-core`.
 
-## 包
+## ✨ Features
 
-| 包 | 职责 |
-| :--- | :--- |
-| `@ihxy/orcha-core` | Document、JSON 1.0、catalog、命令栈；无 Vue |
-| `@ihxy/orcha-vue` | 画布适配、节点注册；再导出 Vue Flow API |
-| `@ihxy/orcha-form` | FormSchema / FormRenderer |
-| `@ihxy/orcha-variable` | 设计态上游输出与 `{{ }}` |
-| `@ihxy/orcha-plugins` | 插件生命周期、撤销重做、复制粘贴、快捷键 |
-| `@ihxy/orcha-materials` | start / end / task / condition |
-| `@ihxy/orcha-editor` | 面板拼装，依赖上面 6 个包 |
+| Feature | Description |
+| --- | --- |
+| [Canvas](https://crayon-hua.github.io/orcha/guide/canvas.html) | Vue Flow as the canvas kernel (grid, Controls, MiniMap), assembled by `@ihxy/orcha-vue`. |
+| [Form](https://crayon-hua.github.io/orcha/guide/form.html) | `FormSchema` / `FormRenderer` drive the property panel. |
+| [Variable](https://crayon-hua.github.io/orcha/guide/variable.html) | Design-time upstream outputs and `{{ nodeId.output }}` insertion. Does not execute. |
+| [Materials](https://crayon-hua.github.io/orcha/materials/introduction.html) | Built-in start / end / task / condition; extend with `defineNodeType`. |
+| [Plugins](https://crayon-hua.github.io/orcha/guide/plugins.html) | History, copy-paste, and keyboard shortcuts in one package. |
+| [Document](https://crayon-hua.github.io/orcha/guide/getting-started.html) | Versioned `WorkflowDefinition` JSON 1.0 + node IO catalog. Runtime consumes JSON, not Vue Flow internals. |
 
-## 本地开发
+## 📦 Packages
 
-```bash
+| Package | Role |
+| --- | --- |
+| [`@ihxy/orcha-core`](./packages/core) | Document, JSON 1.0, catalog, command stack. No Vue. |
+| [`@ihxy/orcha-vue`](./packages/vue) | Canvas adapter, node registry; re-exports Vue Flow APIs. |
+| [`@ihxy/orcha-form`](./packages/form) | FormSchema / FormRenderer. |
+| [`@ihxy/orcha-variable`](./packages/variable) | Design-time upstream outputs and `{{ }}`. |
+| [`@ihxy/orcha-plugins`](./packages/plugins) | Plugin lifecycle, undo/redo, copy-paste, shortcuts. |
+| [`@ihxy/orcha-materials`](./packages/materials) | start / end / task / condition. |
+| [`@ihxy/orcha-editor`](./packages/editor) | Palette + canvas + panel + toolbar. Depends on the six packages above. |
+
+## 📖 Documentation
+
+Full docs: [https://crayon-hua.github.io/orcha/](https://crayon-hua.github.io/orcha/)
+
+- [Introduction](https://crayon-hua.github.io/orcha/)
+- [Install & usage](https://crayon-hua.github.io/orcha/guide/getting-started.html)
+- [Live demo](https://crayon-hua.github.io/orcha/examples/playground.html)
+
+Local docs: `pnpm docs:dev` → [http://localhost:5300](http://localhost:5300).
+
+## 🛠 Local development
+
+This repo is a pnpm workspace.
+
+```sh
 pnpm install
 pnpm dev          # playground
-pnpm docs:dev     # VitePress 文档站
-pnpm build        # 按依赖序构建七个包
-pnpm test         # core 契约单测 + materials 物料校验
+pnpm docs:dev     # VitePress
+pnpm build
+pnpm test
 pnpm lint:all
 ```
 
-playground 默认 `http://localhost:5200/`，文档站 `pnpm docs:dev` 默认 `http://localhost:5300/`。
+## 📬 Contact
 
-## 发版
-
-- **CI**：PR 和推 `main` 时跑 lint / type-check / test / build
-- **文档站**：推 `main` 时由 GitHub Pages workflow 部署
-- **npm**：只在推 `v*` tag 时按依赖序发布七个 `@ihxy/orcha-*` 包
-
-在 `main` 上把七个包的 `version` 改成同一目标版本（以 `packages/editor/package.json` 为准）并提交，然后：
-
-```bash
-git tag v0.1.0
-git push origin v0.1.0
-```
-
-tag 必须与包版本一致（`v0.1.0` → `0.1.0`）。
-
-第一次发 `0.1.0` 必须本机 `publish --access public`（Trusted Publisher 不能创建新包）。仓库根目录：
-
-```bash
-pnpm publish:only
-```
-
-之后在 npm 为每个包绑定同一套 GitHub Trusted Publisher：
-
-- Repository：`Crayon-hua/orcha`
-- Workflow：`publish.yml`
-- Environment：`npm`
-
-后续发版只推 `v*` tag，由 GitHub Actions 自动发布。
+- Issues: [Issues](https://github.com/Crayon-hua/orcha/issues)
 
 ## License
 
-Apache-2.0。
+[Apache-2.0](./LICENSE)

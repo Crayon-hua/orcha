@@ -1,4 +1,6 @@
-# 安装与用法
+# 快速上手
+
+Orcha 是面向 Vue 的可扩展可视化编排框架：画布、节点表单、设计态变量、插件与物料。
 
 ## 安装
 
@@ -143,13 +145,6 @@ const payload = toRuntimePayload(workflow, builtinNodeCatalog)
 ```
 
 `@ihxy/orcha-editor` 再导出这些 API。导出 JSON **暂不强制内嵌 catalog**。
-
-### 定稿标准
-
-- 实例与 catalog 的 Schema + 正反 fixture 在 CI 中跑通
-- 内置 start / end / task / condition 的 IO/ports 都在 catalog 里
-- `toRuntimePayload` 输出能通过 schema
-- 表达式覆盖：合法引用、未知节点、未知 output
 
 ## 服务端渲染
 

@@ -1,30 +1,28 @@
-# Orcha
+---
+layout: home
 
-**Orcha** — An extensible visual orchestration framework for Vue.
+hero:
+  name: Orcha
+  text: Visual orchestration for Vue
+  tagline: Canvas, form, variable, plugins, and materials — a toolkit to embed a workflow designer in your product.
+  actions:
+    - theme: brand
+      text: Get Started
+      link: /guide/getting-started
+    - theme: alt
+      text: GitHub
+      link: https://github.com/Crayon-hua/orcha
+    - theme: alt
+      text: Live Demo
+      link: /examples/playground
 
-基于 [Vue Flow](https://vueflow.dev/) 的可视化编排：画布内核在 `@ihxy/orcha-vue`，节点契约、表单、设计态变量与插件分层。JSON 解析与节点 IO 校验在 `@ihxy/orcha-core`。
-
-```bash
-pnpm add @ihxy/orcha-editor vue
-```
-
-宿主需要 **Vue 3.3+**。不要自己装 `@vue-flow/*`。
-
-```vue
-<template>
-  <WorkflowDesigner v-model="workflow" style="height: 640px" />
-</template>
-
-<script setup>
-import { WorkflowDesigner, createEmptyWorkflow } from '@ihxy/orcha-editor'
-import { ref } from 'vue'
-
-const workflow = ref(createEmptyWorkflow('我的流程'))
-</script>
-```
-
-完整交互请在仓库里跑 `pnpm dev`（playground），或看 [现场演示](/demo)。
-
-## License
-
-Apache-2.0。
+features:
+  - title: Canvas
+    details: Vue Flow as the canvas kernel. Grid, Controls, and MiniMap are assembled by @ihxy/orcha-vue. You do not install @vue-flow/* yourself.
+  - title: Form
+    details: FormSchema and FormRenderer drive the property panel. Compatible with the older fields[] shape.
+  - title: Variable
+    details: Design-time upstream outputs and `nodeId.output` templates. Expressions are not executed in the browser.
+  - title: Materials
+    details: Built-in start, end, task, and condition. Extend with defineNodeType.
+---
